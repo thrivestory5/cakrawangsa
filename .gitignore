@@ -46,3 +46,6 @@ frontend/
 test_*.png
 deck_page_*.png
 
+
+.vercel
+.env*
