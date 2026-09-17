@@ -115,9 +115,9 @@ export default function ContactSection() {
         </div>
 
         {/* Collaboration Form & Office Dossier Split */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
           {/* Left: Project Inquiry Builder */}
-          <div className="lg:col-span-7 bg-[#0b0f19] p-8 sm:p-10 rounded-3xl border border-amber-400/30 shadow-[0_15px_45px_rgba(0,0,0,0.7)]">
+          <div className="lg:col-span-7 bg-[#0b0f19] p-7 sm:p-9 rounded-2xl border border-amber-400/30 shadow-[0_15px_45px_rgba(0,0,0,0.7)] flex flex-col justify-between h-full">
             <div className="flex items-center justify-between pb-4 border-b border-amber-500/20 mb-6">
               <div>
                 <span className="text-[10px] font-mono tracking-widest text-amber-400 uppercase font-semibold">
@@ -127,74 +127,78 @@ export default function ContactSection() {
                   Formulir Konsultasi Proyek
                 </h3>
               </div>
-              <MessageSquare className="w-6 h-6 text-amber-400" />
+              <div className="w-10 h-10 rounded-xl bg-amber-400/10 border border-amber-400/20 flex items-center justify-center text-amber-300">
+                <MessageSquare className="w-5 h-5 text-amber-400" />
+              </div>
             </div>
 
-            <form onSubmit={handleWhatsAppSend} className="space-y-5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <form onSubmit={handleWhatsAppSend} className="space-y-4 flex-1 flex flex-col justify-between">
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5">
+                      Nama Lengkap *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="Contoh: Rian Pratama"
+                      className="w-full px-4 py-3 rounded-xl bg-black/60 border border-amber-500/20 text-white text-sm focus:outline-none focus:border-amber-400 font-sans transition-colors placeholder:text-slate-600"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5">
+                      Perusahaan / Instansi
+                    </label>
+                    <input
+                      type="text"
+                      value={org}
+                      onChange={(e) => setOrg(e.target.value)}
+                      placeholder="Nama Perusahaan / Organisasi"
+                      className="w-full px-4 py-3 rounded-xl bg-black/60 border border-amber-500/20 text-white text-sm focus:outline-none focus:border-amber-400 font-sans transition-colors placeholder:text-slate-600"
+                    />
+                  </div>
+                </div>
+
                 <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">
-                    Nama Lengkap *
+                  <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5">
+                    Kategori Kebutuhan Proyek *
                   </label>
-                  <input
-                    type="text"
-                    required
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Contoh: Rian Pratama"
-                    className="w-full px-4 py-3 rounded-xl bg-black/60 border border-amber-500/20 text-white text-sm focus:outline-none focus:border-amber-400 font-sans transition-colors placeholder:text-slate-600"
+                  <select
+                    value={projectType}
+                    onChange={(e) => setProjectType(e.target.value)}
+                    className="w-full px-4 py-3 rounded-xl bg-black/80 border border-amber-500/20 text-amber-200 text-sm focus:outline-none focus:border-amber-400 font-sans transition-colors cursor-pointer"
+                  >
+                    <option value="Film & Series">Produksi Film Layar Lebar & Serial</option>
+                    <option value="Brand & Corporate">Company Profile & Iklan Komersial (TVC)</option>
+                    <option value="Digital Content & Microdrama">Digital Content & Microdrama Platform</option>
+                    <option value="Investment & Co-Production">Investasi Sinema & Ko-Produksi</option>
+                    <option value="Distribution & OTT">Kemitraan Distribusi & Platform OTT</option>
+                    <option value="Production Services">Penyewaan Kru, Alat, & Izin Lokasi</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5">
+                    Rincian Gagasan / Pesan
+                  </label>
+                  <textarea
+                    rows={4}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Ceritakan rencana proyek, estimasi waktu, atau ekspektasi output..."
+                    className="w-full px-4 py-3 rounded-xl bg-black/60 border border-amber-500/20 text-white text-sm focus:outline-none focus:border-amber-400 font-sans transition-colors placeholder:text-slate-600 resize-none"
                   />
                 </div>
-                <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">
-                    Perusahaan / Instansi
-                  </label>
-                  <input
-                    type="text"
-                    value={org}
-                    onChange={(e) => setOrg(e.target.value)}
-                    placeholder="Nama Perusahaan / Organisasi"
-                    className="w-full px-4 py-3 rounded-xl bg-black/60 border border-amber-500/20 text-white text-sm focus:outline-none focus:border-amber-400 font-sans transition-colors placeholder:text-slate-600"
-                  />
-                </div>
               </div>
 
-              <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">
-                  Kategori Kebutuhan Proyek *
-                </label>
-                <select
-                  value={projectType}
-                  onChange={(e) => setProjectType(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl bg-black/80 border border-amber-500/20 text-amber-200 text-sm focus:outline-none focus:border-amber-400 font-sans transition-colors cursor-pointer"
-                >
-                  <option value="Film & Series">Produksi Film Layar Lebar & Serial</option>
-                  <option value="Brand & Corporate">Company Profile & Iklan Komersial (TVC)</option>
-                  <option value="Digital Content & Microdrama">Digital Content & Microdrama Platform</option>
-                  <option value="Investment & Co-Production">Investasi Sinema & Ko-Produksi</option>
-                  <option value="Distribution & OTT">Kemitraan Distribusi & Platform OTT</option>
-                  <option value="Production Services">Penyewaan Kru, Alat, & Izin Lokasi</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">
-                  Rincian Gagasan / Pesan
-                </label>
-                <textarea
-                  rows={4}
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Ceritakan rencana proyek, estimasi waktu, atau ekspektasi output..."
-                  className="w-full px-4 py-3 rounded-xl bg-black/60 border border-amber-500/20 text-white text-sm focus:outline-none focus:border-amber-400 font-sans transition-colors placeholder:text-slate-600"
-                />
-              </div>
-
-              <div className="pt-2 flex flex-col sm:flex-row gap-3">
+              <div className="pt-3 flex flex-col sm:flex-row gap-3">
                 <button
                   type="submit"
                   data-cursor-text="WHATSAPP"
-                  className="flex-1 inline-flex items-center justify-center gap-2 py-4 px-6 rounded-xl bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 text-black font-serif font-bold text-sm uppercase tracking-wider hover:opacity-95 transition-all shadow-[0_0_25px_rgba(212,175,55,0.4)]"
+                  className="flex-1 inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 text-black font-serif font-bold text-sm uppercase tracking-wider hover:opacity-95 transition-all shadow-[0_0_25px_rgba(212,175,55,0.4)]"
                 >
                   <Phone className="w-4 h-4" />
                   <span>Kirim Pesan via WhatsApp</span>
@@ -204,7 +208,7 @@ export default function ContactSection() {
                   href={`mailto:cakrawangsacinema@gmail.com?subject=Konsultasi%20Proyek%20Cakrawangsa%20-%20${encodeURIComponent(
                     name || "Klien"
                   )}`}
-                  className="inline-flex items-center justify-center gap-2 py-4 px-6 rounded-xl border border-amber-500/30 text-amber-200 font-serif text-sm uppercase tracking-wider hover:border-amber-400 hover:text-white transition-colors"
+                  className="inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl border border-amber-500/30 text-amber-200 font-serif text-sm uppercase tracking-wider hover:border-amber-400 hover:text-white transition-colors"
                 >
                   <Mail className="w-4 h-4" />
                   <span>Email Kami</span>
@@ -214,28 +218,30 @@ export default function ContactSection() {
           </div>
 
           {/* Right: Dual Office Location Dossier & QR Code */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="lg:col-span-5 flex flex-col justify-between h-full gap-4">
             {/* Head Office Card (Menara 165) */}
-            <div className="p-6 rounded-2xl bg-[#090d16] border border-amber-500/20 hover:border-amber-400/40 transition-colors">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-[10px] font-mono tracking-widest text-amber-400 uppercase bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">
-                  HEAD OFFICE
-                </span>
-                <MapPin className="w-4 h-4 text-amber-400" />
+            <div className="p-5 sm:p-6 rounded-2xl bg-[#090d16] border border-amber-500/20 hover:border-amber-400/40 transition-colors flex flex-col justify-between flex-1">
+              <div>
+                <div className="flex items-center justify-between mb-2.5">
+                  <span className="text-[10px] font-mono tracking-widest text-amber-400 uppercase bg-amber-400/10 px-2.5 py-0.5 rounded border border-amber-400/20 font-semibold">
+                    HEAD OFFICE
+                  </span>
+                  <MapPin className="w-4 h-4 text-amber-400" />
+                </div>
+                <h4 className="font-serif text-base sm:text-lg font-bold text-white uppercase tracking-wide">
+                  Menara 165 Jakarta
+                </h4>
+                <p className="text-xs text-slate-300 font-mono mt-2 leading-relaxed">
+                  Menara 165, 10th Floor <br />
+                  Jl. T.B. Simatupang Kav. 1 <br />
+                  South Jakarta, DKI Jakarta, Indonesia
+                </p>
               </div>
-              <h4 className="font-serif text-lg font-bold text-white uppercase">
-                Menara 165 Jakarta
-              </h4>
-              <p className="text-xs text-slate-300 font-mono mt-2 leading-relaxed">
-                Menara 165, 10th Floor <br />
-                Jl. T.B. Simatupang Kav. 1 <br />
-                South Jakarta, DKI Jakarta, Indonesia
-              </p>
               <a
                 href="https://maps.google.com/?q=Menara+165+TB+Simatupang+Jakarta"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center gap-1.5 text-xs font-mono text-amber-300 hover:text-white transition-colors"
+                className="mt-3 inline-flex items-center gap-1.5 text-xs font-mono text-amber-300 hover:text-white transition-colors"
               >
                 <span>Buka Google Maps</span>
                 <ExternalLink className="w-3 h-3" />
@@ -243,26 +249,28 @@ export default function ContactSection() {
             </div>
 
             {/* Creative Studio & Production Base (Bekasi) */}
-            <div className="p-6 rounded-2xl bg-[#090d16] border border-amber-500/20 hover:border-amber-400/40 transition-colors">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-[10px] font-mono tracking-widest text-amber-400 uppercase bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">
-                  CREATIVE STUDIO & PRODUCTION BASE
-                </span>
-                <Building2 className="w-4 h-4 text-amber-400" />
+            <div className="p-5 sm:p-6 rounded-2xl bg-[#090d16] border border-amber-500/20 hover:border-amber-400/40 transition-colors flex flex-col justify-between flex-1">
+              <div>
+                <div className="flex items-center justify-between mb-2.5">
+                  <span className="text-[10px] font-mono tracking-widest text-amber-400 uppercase bg-amber-400/10 px-2.5 py-0.5 rounded border border-amber-400/20 font-semibold">
+                    CREATIVE STUDIO & PRODUCTION BASE
+                  </span>
+                  <Building2 className="w-4 h-4 text-amber-400" />
+                </div>
+                <h4 className="font-serif text-base sm:text-lg font-bold text-white uppercase tracking-wide">
+                  Studio Dirgantara Permai
+                </h4>
+                <p className="text-xs text-slate-300 font-mono mt-2 leading-relaxed">
+                  Perumahan Bumi Dirgantara Permai <br />
+                  Jl. Garuda Blok BU No. 25, Kel. Jatisari, <br />
+                  Kec. Jatiasih, Kota Bekasi, Jawa Barat
+                </p>
               </div>
-              <h4 className="font-serif text-lg font-bold text-white uppercase">
-                Studio Dirgantara Permai
-              </h4>
-              <p className="text-xs text-slate-300 font-mono mt-2 leading-relaxed">
-                Perumahan Bumi Dirgantara Permai <br />
-                Jl. Garuda Blok BU No. 25, Kel. Jatisari, <br />
-                Kec. Jatiasih, Kota Bekasi, Jawa Barat
-              </p>
               <a
                 href="https://maps.google.com/?q=Bumi+Dirgantara+Permai+Jatiasih+Bekasi"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center gap-1.5 text-xs font-mono text-amber-300 hover:text-white transition-colors"
+                className="mt-3 inline-flex items-center gap-1.5 text-xs font-mono text-amber-300 hover:text-white transition-colors"
               >
                 <span>Buka Google Maps</span>
                 <ExternalLink className="w-3 h-3" />
@@ -270,20 +278,23 @@ export default function ContactSection() {
             </div>
 
             {/* Direct Contact & QR Box */}
-            <div className="p-6 rounded-2xl bg-gradient-to-r from-amber-500/10 to-[#0a0d16] border border-amber-400/30 flex items-center justify-between gap-4">
+            <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-amber-500/10 via-[#0a0d16] to-[#090d16] border border-amber-400/30 flex items-center justify-between gap-4">
               <div>
-                <span className="text-[10px] font-mono tracking-widest text-amber-400 uppercase block">
-                  FAST RESPONSE WHATSAPP
-                </span>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-[10px] font-mono tracking-widest text-amber-400 uppercase font-semibold">
+                    FAST RESPONSE WHATSAPP
+                  </span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399] animate-pulse" />
+                </div>
                 <a
                   href="https://wa.me/6282112110112"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-serif text-xl font-bold text-white hover:text-amber-300 transition-colors"
+                  className="font-serif text-lg sm:text-xl font-bold text-white hover:text-amber-300 transition-colors tracking-wide"
                 >
                   +62 821-1211-0112
                 </a>
-                <p className="text-[11px] font-mono text-slate-400 mt-1">
+                <p className="text-[11px] font-mono text-slate-400 mt-0.5">
                   cakrawangsacinema@gmail.com
                 </p>
               </div>
@@ -291,9 +302,9 @@ export default function ContactSection() {
               <button
                 onClick={() => setShowQR(true)}
                 data-cursor-text="SCAN"
-                className="p-3 rounded-xl bg-amber-400 text-black hover:bg-amber-300 transition-transform hover:scale-105 flex flex-col items-center gap-1 flex-shrink-0"
+                className="p-3 rounded-xl bg-gradient-to-br from-amber-300 to-amber-500 text-black hover:opacity-90 transition-transform hover:scale-105 flex flex-col items-center gap-1 flex-shrink-0 shadow-[0_0_15px_rgba(212,175,55,0.3)]"
               >
-                <QrCode className="w-6 h-6" />
+                <QrCode className="w-5 h-5" />
                 <span className="text-[9px] font-mono font-bold tracking-wider">QR CODE</span>
               </button>
             </div>
