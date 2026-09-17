@@ -131,10 +131,10 @@ export default function EcosystemSection() {
         </div>
 
         {/* Interactive Ecosystem Network Matrix */}
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
           {/* Left: 9 Clickable & Hoverable Sector Nodes */}
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {ECOSYSTEM_NODES.map((node) => {
+          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-3.5 h-full auto-rows-fr">
+            {ECOSYSTEM_NODES.map((node, index) => {
               const Icon = node.icon;
               const isSelected = activeNode.id === node.id;
               return (
@@ -144,104 +144,124 @@ export default function EcosystemSection() {
                   onFocus={() => setActiveNode(node)}
                   onClick={() => setActiveNode(node)}
                   data-cursor-text="INSPECT"
-                  className={`p-4 rounded-xl text-left transition-all duration-300 relative border flex flex-col justify-between min-h-[130px] cursor-pointer ${
+                  className={`p-4 sm:p-5 rounded-2xl text-left transition-all duration-300 relative border flex flex-col justify-between cursor-pointer group ${
                     isSelected
-                      ? "bg-gradient-to-b from-[#1c2438] to-[#0f1422] border-amber-400 shadow-[0_0_25px_rgba(212,175,55,0.3)] translate-x-1"
-                      : "bg-[#0a0e18]/80 border-amber-500/15 hover:border-amber-400/40 hover:bg-[#111728]"
+                      ? "bg-gradient-to-b from-[#1c2438] to-[#0f1422] border-amber-400 shadow-[0_0_30px_rgba(212,175,55,0.25)] ring-1 ring-amber-400/50"
+                      : "bg-[#0a0e18]/85 border-amber-500/15 hover:border-amber-400/50 hover:bg-[#111728] hover:-translate-y-0.5"
                   }`}
                 >
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between w-full">
                     <div
-                      className={`p-2 rounded-lg transition-colors ${
+                      className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${
                         isSelected
-                          ? "bg-amber-400 text-black shadow-[0_0_10px_#D4AF37]"
-                          : "bg-amber-400/10 text-amber-300"
+                          ? "bg-amber-400 text-black shadow-[0_0_12px_#D4AF37]"
+                          : "bg-amber-400/10 text-amber-300 group-hover:bg-amber-400/20 group-hover:text-amber-200"
                       }`}
                     >
                       <Icon className="w-4 h-4" />
                     </div>
-                    {isSelected && (
-                      <span className="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_8px_#D4AF37] animate-ping" />
-                    )}
+
+                    <span
+                      className={`text-[10px] font-mono tracking-widest font-bold transition-colors ${
+                        isSelected ? "text-amber-400" : "text-slate-500 group-hover:text-amber-400/70"
+                      }`}
+                    >
+                      0{index + 1}
+                    </span>
                   </div>
 
-                  <h3
-                    className={`font-serif text-xs font-bold uppercase tracking-wider mt-3 leading-snug transition-colors ${
-                      isSelected ? "text-amber-200" : "text-slate-300"
-                    }`}
-                  >
-                    {node.name}
-                  </h3>
+                  <div className="mt-4">
+                    <h3
+                      className={`font-serif text-xs sm:text-[13px] font-bold uppercase tracking-wide leading-snug transition-colors ${
+                        isSelected ? "text-amber-200" : "text-slate-200 group-hover:text-white"
+                      }`}
+                    >
+                      {node.name}
+                    </h3>
+                  </div>
+
+                  {/* Active bottom accent line */}
+                  {isSelected && (
+                    <div className="absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-to-r from-transparent via-amber-400 to-transparent" />
+                  )}
                 </button>
               );
             })}
           </div>
 
           {/* Right: Deep-Dive Inspector Panel for Selected Node (Auto Changes on Hover) */}
-          <div className="lg:col-span-5 bg-gradient-to-b from-[#131a2b] to-[#0a0e1a] p-8 rounded-3xl border border-amber-400/30 relative overflow-hidden shadow-[0_15px_45px_rgba(0,0,0,0.7)] min-h-[440px] flex flex-col justify-between">
+          <div className="lg:col-span-5 bg-gradient-to-b from-[#111728] via-[#0d121f] to-[#080c16] p-7 sm:p-8 rounded-2xl border border-amber-400/35 relative overflow-hidden shadow-[0_15px_45px_rgba(0,0,0,0.7)] flex flex-col justify-between h-full">
             <div className="absolute top-0 right-0 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeNode.id}
-                initial={{ opacity: 0, y: 12 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.22, ease: "easeOut" }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
                 className="flex-1 flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-center gap-3 border-b border-amber-500/20 pb-4">
-                    <div className="p-3 rounded-xl bg-amber-400 text-black shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+                  <div className="flex items-center gap-3.5 border-b border-amber-500/20 pb-4">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-300 to-amber-500 text-black flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.4)] shrink-0">
                       <activeNode.icon className="w-6 h-6" />
                     </div>
                     <div>
-                      <span className="text-[10px] font-mono tracking-widest text-amber-400 uppercase font-semibold">
-                        Ecosystem Sector Analysis
-                      </span>
-                      <h3 className="font-serif text-xl sm:text-2xl font-bold uppercase text-white">
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] font-mono tracking-widest text-amber-400 uppercase font-semibold">
+                          SECTOR 0{ECOSYSTEM_NODES.findIndex((n) => n.id === activeNode.id) + 1} // ANALYSIS
+                        </span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399] animate-pulse" />
+                      </div>
+                      <h3 className="font-serif text-lg sm:text-xl md:text-2xl font-bold uppercase text-white tracking-wide mt-0.5">
                         {activeNode.name}
                       </h3>
                     </div>
                   </div>
 
-                  <div className="mt-6">
-                    <h4 className="text-xs font-mono uppercase tracking-widest text-amber-400/90 mb-2">
-                      Fungsi & Nilai Strategis
-                    </h4>
-                    <p className="text-slate-200 text-sm leading-relaxed">
-                      {activeNode.desc}
-                    </p>
-                  </div>
-
-                  <div className="mt-6 pt-6 border-t border-white/10 space-y-4">
+                  <div className="mt-5 space-y-4">
                     <div>
-                      <h4 className="text-[11px] font-mono uppercase tracking-widest text-slate-400">
-                        Target Kemitraan & Klien:
+                      <h4 className="text-[10px] font-mono uppercase tracking-[0.2em] text-amber-400/90 font-semibold mb-1.5">
+                        Fungsi & Nilai Strategis
                       </h4>
-                      <p className="text-xs text-amber-200 mt-1 font-medium">
-                        {activeNode.clients}
+                      <p className="text-slate-200 text-xs sm:text-sm leading-relaxed">
+                        {activeNode.desc}
                       </p>
                     </div>
 
-                    <div>
-                      <h4 className="text-[11px] font-mono uppercase tracking-widest text-slate-400">
-                        Output & Solusi Produksi:
-                      </h4>
-                      <p className="text-xs text-slate-300 mt-1">
-                        {activeNode.deliverables}
-                      </p>
+                    <div className="p-4 rounded-xl bg-black/40 border border-amber-500/15 space-y-3">
+                      <div>
+                        <h4 className="text-[10px] font-mono uppercase tracking-wider text-slate-400">
+                          Target Kemitraan & Klien:
+                        </h4>
+                        <p className="text-xs text-amber-200 mt-1 font-medium leading-normal">
+                          {activeNode.clients}
+                        </p>
+                      </div>
+
+                      <div className="border-t border-amber-500/10 pt-2.5">
+                        <h4 className="text-[10px] font-mono uppercase tracking-wider text-slate-400">
+                          Output & Solusi Produksi:
+                        </h4>
+                        <p className="text-xs text-slate-300 mt-1 leading-normal">
+                          {activeNode.deliverables}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-amber-500/20 flex items-center justify-between">
-                  <span className="text-[11px] font-mono text-amber-400/80">
-                    Kolaborasi Tersedia
-                  </span>
+                <div className="mt-6 pt-5 border-t border-amber-500/20 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
+                    <span className="text-[11px] font-mono text-slate-300">
+                      Kolaborasi Tersedia
+                    </span>
+                  </div>
                   <a
                     href="#contact"
-                    className="inline-flex items-center gap-1 text-xs font-mono font-bold text-amber-300 hover:text-white transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-amber-400/10 border border-amber-400/30 text-xs font-mono font-bold text-amber-300 hover:bg-amber-400 hover:text-black transition-all shadow-[0_0_12px_rgba(212,175,55,0.15)]"
                   >
                     <span>Ajukan Kemitraan</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -250,7 +270,6 @@ export default function EcosystemSection() {
               </motion.div>
             </AnimatePresence>
           </div>
-
         </div>
 
         {/* Bottom Industry Badges & Metrics Bar (Slide 4 Footer) */}
