@@ -24,7 +24,7 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://cakrawangsacinema.com"),
+  metadataBase: new URL("https://cakrawangsa-cinema.vercel.app"),
   title: "PT. CAKRAWANGSA CINEMA PRODUCTION | Transforming Stories Into Cinematic Experiences",
   description: "Perusahaan kreatif terkemuka di Indonesia yang bergerak dalam produksi film layar lebar, konten audiovisual, media kreatif, periklanan korporat, dan hiburan berskala nasional dan internasional.",
   icons: {
