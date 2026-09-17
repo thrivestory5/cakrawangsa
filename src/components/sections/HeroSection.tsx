@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Play, Sparkles, ChevronDown, Award, Clapperboard, Film } from "lucide-react";
@@ -58,18 +57,6 @@ export default function HeroSection() {
 
         {/* Subtle Cinematic Grid */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#d4af3706_1px,transparent_1px),linear-gradient(to_bottom,#d4af3706_1px,transparent_1px)] bg-[size:5rem_5rem]" />
-
-        {/* Grand Cinematic Cakrawangsa Studio Logo Background */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[500px] md:w-[660px] lg:w-[760px] aspect-square opacity-20 pointer-events-none flex items-center justify-center mix-blend-screen select-none">
-          <Image
-            src="/cakrawangsa_logo.png"
-            alt="PT. Cakrawangsa Cinema Production Logo"
-            width={800}
-            height={800}
-            priority
-            className="w-full h-full object-contain filter drop-shadow-[0_0_60px_rgba(212,175,55,0.35)]"
-          />
-        </div>
       </div>
 
 
